@@ -112,11 +112,15 @@ class _BetterPlayerCupertinoControlsState
               else
                 _buildHitArea(),*/
               // _buildNextVideoWidget(),
-              if (_controlsConfiguration.enablePlayPause)
-                _buildPlayPause(_controller, iconColor, barHeight)
-              else
-                const SizedBox(),
-              // _buildBottomBar(backgroundColor, iconColor, barHeight),
+              AnimatedOpacity(
+                opacity: _hideStuff ? 0.0 : 1.0,
+                duration: _controlsConfiguration.controlsHideTime,
+                onEnd: _onPlayerHide,
+                child: _controlsConfiguration.enablePlayPause
+                    ? _buildPlayPause(_controller, iconColor, barHeight)
+                    : const SizedBox(),
+                // _buildBottomBar(backgroundColor, iconColor, barHeight),
+              ),
             ],
           ),
         ),
@@ -395,7 +399,10 @@ class _BetterPlayerCupertinoControlsState
       onTap: _onPlayPause,
       child: Container(
         height: barHeight,
-        color: Colors.transparent,
+        decoration: BoxDecoration(
+          color: Colors.black38,
+          borderRadius: BorderRadius.circular(barHeight / 2),
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 6),
         child: Icon(
           controller.value.isPlaying
