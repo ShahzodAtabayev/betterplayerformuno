@@ -1,1 +1,1 @@
-enum BetterPlayerTheme { material, cupertino, custom }
+enum BetterPlayerTheme { material,  cupertino, custom }

@@ -45,6 +45,8 @@ class BetterPlayerController extends ChangeNotifier {
 
   bool get autoPlay => betterPlayerConfiguration.autoPlay;
 
+  bool get autoReplay => betterPlayerConfiguration.autoReplay;
+
   Widget Function(BuildContext context, String errorMessage) get errorBuilder =>
       betterPlayerConfiguration.errorBuilder;
 
@@ -357,6 +359,9 @@ class BetterPlayerController extends ChangeNotifier {
         videoPlayerController.addListener(_fullScreenListener);
       }
     }
+    if (autoReplay) {
+      videoPlayerController.addListener(_autoReplayListener);
+    }
 
     final startAt = betterPlayerConfiguration.startAt;
     if (startAt != null) {
@@ -368,6 +373,17 @@ class BetterPlayerController extends ChangeNotifier {
     if (videoPlayerController.value.isPlaying && !_isFullScreen) {
       enterFullScreen();
       videoPlayerController.removeListener(_fullScreenListener);
+    }
+  }
+
+  void _autoReplayListener()  {
+    var videoPlayerValue = videoPlayerController.value;
+    if (videoPlayerValue?.position != null &&
+        videoPlayerValue?.duration != null &&
+        videoPlayerValue.position >= videoPlayerValue.duration) {
+      seekTo(Duration(seconds: 0)).then((value) {
+        play();
+      });
     }
   }
 

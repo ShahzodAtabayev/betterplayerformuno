@@ -12,6 +12,9 @@ class BetterPlayerConfiguration {
   /// Play the video as soon as it's displayed
   final bool autoPlay;
 
+  /// Auto replay, When video finished
+  final bool autoReplay;
+
   /// Start video at a certain position
   final Duration startAt;
 
@@ -107,6 +110,7 @@ class BetterPlayerConfiguration {
   const BetterPlayerConfiguration({
     this.aspectRatio,
     this.autoPlay = false,
+    this.autoReplay = false,
     this.startAt,
     this.looping = false,
     this.fullScreenByDefault = false,
@@ -144,6 +148,7 @@ class BetterPlayerConfiguration {
   BetterPlayerConfiguration copyWith({
     double aspectRatio,
     bool autoPlay,
+    bool autoReplay,
     Duration startAt,
     bool looping,
     bool fullScreenByDefault,
@@ -171,6 +176,7 @@ class BetterPlayerConfiguration {
     return BetterPlayerConfiguration(
       aspectRatio: aspectRatio ?? this.aspectRatio,
       autoPlay: autoPlay ?? this.autoPlay,
+      autoReplay: autoReplay ?? this.autoReplay,
       startAt: startAt ?? this.startAt,
       looping: looping ?? this.looping,
       fullScreenByDefault: fullScreenByDefault ?? this.fullScreenByDefault,

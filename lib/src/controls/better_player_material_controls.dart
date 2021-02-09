@@ -64,6 +64,7 @@ class _BetterPlayerMaterialControlsState
   BetterPlayerControlsConfiguration get betterPlayerControlsConfiguration =>
       _controlsConfiguration;
 
+
   @override
   Widget build(BuildContext context) {
     _wasLoading = isLoading(_latestValue);

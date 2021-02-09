@@ -72,6 +72,25 @@ class _ChangePlayerThemePageState extends State<ChangePlayerThemePage> {
                     });
                   },
                 ),
+               /* MaterialButton(
+                  child: Text("MUNO"),
+                  onPressed: () {
+                    setState(() {
+                      _playerTheme = BetterPlayerTheme.muno;
+                      _betterPlayerController.pause();
+                      _betterPlayerController = new BetterPlayerController(
+                        BetterPlayerConfiguration(
+                          autoDispose: true,
+                          controlsConfiguration:
+                              BetterPlayerControlsConfiguration(
+                            playerTheme: _playerTheme,
+                          ),
+                        ),
+                        betterPlayerDataSource: _dataSource,
+                      );
+                    });
+                  },
+                ),*/
                 MaterialButton(
                   child: Text("CUPERTINO"),
                   onPressed: () {

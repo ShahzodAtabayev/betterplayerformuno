@@ -64,6 +64,11 @@ class _BetterPlayerCupertinoControlsState
       _controlsConfiguration;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     _betterPlayerController = BetterPlayerController.of(context);
 
@@ -73,7 +78,17 @@ class _BetterPlayerCupertinoControlsState
         child: _buildErrorWidget(),
       );
     }
-
+  /*  _betterPlayerController.videoPlayerController.addListener(() {
+      var videoPlayerValue =
+          _betterPlayerController.videoPlayerController.value;
+      if (videoPlayerValue?.position != null &&
+          videoPlayerValue?.duration != null &&
+          videoPlayerValue.position >= videoPlayerValue.duration) {
+        _betterPlayerController.seekTo(Duration(seconds: 0)).then((value) {
+          _betterPlayerController.play();
+        });
+      }
+    });*/
     final backgroundColor = _controlsConfiguration.controlBarColor;
     final iconColor = _controlsConfiguration.iconsColor;
     _betterPlayerController = BetterPlayerController.of(context);
@@ -107,20 +122,20 @@ class _BetterPlayerCupertinoControlsState
             children: [
               /* _buildTopBar(
                   backgroundColor, iconColor, barHeight, buttonPadding),*/
-              /*if (_wasLoading)
+              if (_wasLoading)
                 Expanded(child: Center(child: _buildLoadingWidget()))
               else
-                _buildHitArea(),*/
+                AnimatedOpacity(
+                  opacity: _hideStuff ? 0.0 : 1.0,
+                  duration: _controlsConfiguration.controlsHideTime,
+                  onEnd: _onPlayerHide,
+                  child: _controlsConfiguration.enablePlayPause
+                      ? _buildPlayPause(_controller, iconColor, barHeight)
+                      : const SizedBox(),
+                  // _buildBottomBar(backgroundColor, iconColor, barHeight),
+                ),
+              // _buildHitArea(),
               // _buildNextVideoWidget(),
-              AnimatedOpacity(
-                opacity: _hideStuff ? 0.0 : 1.0,
-                duration: _controlsConfiguration.controlsHideTime,
-                onEnd: _onPlayerHide,
-                child: _controlsConfiguration.enablePlayPause
-                    ? _buildPlayPause(_controller, iconColor, barHeight)
-                    : const SizedBox(),
-                // _buildBottomBar(backgroundColor, iconColor, barHeight),
-              ),
             ],
           ),
         ),
